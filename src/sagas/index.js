@@ -22,6 +22,7 @@ export function* init() {
     console.log("LOADED TOP TEN:", topTenItems);
     const embedlyReqs = yield all(
       topTenItems.map(item => {
+        if (!item.url) item.url = "https://news.ycombinator.com/";
         const url = encodeURIComponent(item.url);
         return call(
           fetch,

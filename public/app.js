@@ -35203,6 +35203,7 @@ function init() {
           console.log("LOADED TOP TEN:", topTenItems);
           _context.next = 16;
           return (0, _effects.all)(topTenItems.map(function (item) {
+            if (!item.url) item.url = "https://news.ycombinator.com/";
             var url = encodeURIComponent(item.url);
             return (0, _effects.call)(fetch, "http://api.embed.ly/1/oembed?url=" + url + "&key=15d8c8a419c14f3e8f1f1424822dd394");
           }));
@@ -35306,7 +35307,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"], ["\n  display: flex;\n  flex-direction: column;\n"]);
+var _templateObject = _taggedTemplateLiteral(["\n  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i');\n\n  body {\n    margin: 0;\n  }\n\n  * {\n    font-family: \"Open Sans\",-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif;\n  }\n"], ["\n  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i');\n\n  body {\n    margin: 0;\n  }\n\n  * {\n    font-family: \"Open Sans\",-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif;\n  }\n"]),
+    _templateObject2 = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n"], ["\n  display: flex;\n  flex-direction: column;\n"]);
 
 var _react = __webpack_require__(95);
 
@@ -35330,7 +35332,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Wrap = _styledComponents2.default.div(_templateObject);
+(0, _styledComponents.injectGlobal)(_templateObject);
+
+var Wrap = _styledComponents2.default.div(_templateObject2);
 
 var FrontPage = function (_React$Component) {
   _inherits(FrontPage, _React$Component);
@@ -35374,11 +35378,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["\n  flex: 1 0 auto;\n  display: flex;\n  justify-content: space-around;\n  flex-direction: row;\n  width: 100%;\n  background-color: hsl(", ", 80%, 80%);\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"], ["\n  flex: 1 0 auto;\n  display: flex;\n  justify-content: space-around;\n  flex-direction: row;\n  width: 100%;\n  background-color: hsl(", ", 80%, 80%);\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"]),
+var _templateObject = _taggedTemplateLiteral(["\n  flex: 1 0 auto;\n  display: flex;\n  justify-content: center;\n  flex-direction: row;\n  width: 100%;\n  background-color: hsl(", ", 95%, 85%);\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"], ["\n  flex: 1 0 auto;\n  display: flex;\n  justify-content: center;\n  flex-direction: row;\n  width: 100%;\n  background-color: hsl(", ", 95%, 85%);\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"]),
     _templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"], ["\n  width: 100%;\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"]),
-    _templateObject3 = _taggedTemplateLiteral(["\n  flex: 1 0 auto;\n  margin-left: 2rem;\n\n  & h1 {\n    font-style: italic;\n    padding: 0.5rem;\n  }\n\n  & * {\n    max-width: 42rem;\n    display: block;\n    background-color: #fff;\n    white-space: wrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n"], ["\n  flex: 1 0 auto;\n  margin-left: 2rem;\n\n  & h1 {\n    font-style: italic;\n    padding: 0.5rem;\n  }\n\n  & * {\n    max-width: 42rem;\n    display: block;\n    background-color: #fff;\n    white-space: wrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n"]),
-    _templateObject4 = _taggedTemplateLiteral(["\n  flex: 0 0 16rem;\n  font-size: 4rem;\n  text-align: right;\n  color: #fff;\n"], ["\n  flex: 0 0 16rem;\n  font-size: 4rem;\n  text-align: right;\n  color: #fff;\n"]),
-    _templateObject5 = _taggedTemplateLiteral(["font-size: 6rem;"], ["font-size: 6rem;"]);
+    _templateObject3 = _taggedTemplateLiteral(["\n  flex: 0 0 auto;\n  margin-left: 2rem;\n\n  & h1 {\n    width: 42rem;\n    margin-right: 2rem;\n    display: block;\n    background-color: #fff;\n    white-space: wrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    box-shadow: 0.5rem 0.5rem 1px rgba(0, 0, 0, 0.3);\n    color: #000;\n    underline: none;\n    font-style: italic;\n    padding: 0.5rem;\n  }\n\n  & h1 span {\n    display: block;\n    font-size: 1rem;\n    font-style: normal;\n  }\n\n  & p {\n    padding: 0 0.5rem;\n    background: rgba(255, 255, 255, 0.8);\n  }\n"], ["\n  flex: 0 0 auto;\n  margin-left: 2rem;\n\n  & h1 {\n    width: 42rem;\n    margin-right: 2rem;\n    display: block;\n    background-color: #fff;\n    white-space: wrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    box-shadow: 0.5rem 0.5rem 1px rgba(0, 0, 0, 0.3);\n    color: #000;\n    underline: none;\n    font-style: italic;\n    padding: 0.5rem;\n  }\n\n  & h1 span {\n    display: block;\n    font-size: 1rem;\n    font-style: normal;\n  }\n\n  & p {\n    padding: 0 0.5rem;\n    background: rgba(255, 255, 255, 0.8);\n  }\n"]),
+    _templateObject4 = _taggedTemplateLiteral(["\n  flex: 0 0 8rem;\n  font-size: 6rem;\n  text-align: right;\n  color: #fff;\n  text-shadow: 0.1rem 0.1rem 1px rgba(0, 0, 0, 0.5);\n"], ["\n  flex: 0 0 8rem;\n  font-size: 6rem;\n  text-align: right;\n  color: #fff;\n  text-shadow: 0.1rem 0.1rem 1px rgba(0, 0, 0, 0.5);\n"]),
+    _templateObject5 = _taggedTemplateLiteral(["\n  flex: 0 0 12rem;\n  font-size: 2rem;\n  text-align: right;\n  color: #fff;\n  text-shadow: 0.1rem 0.1rem 1px rgba(0, 0, 0, 0.5);\n"], ["\n  flex: 0 0 12rem;\n  font-size: 2rem;\n  text-align: right;\n  color: #fff;\n  text-shadow: 0.1rem 0.1rem 1px rgba(0, 0, 0, 0.5);\n"]),
+    _templateObject6 = _taggedTemplateLiteral(["float: right;"], ["float: right;"]);
 
 var _react = __webpack_require__(95);
 
@@ -35387,6 +35392,10 @@ var _react2 = _interopRequireDefault(_react);
 var _styledComponents = __webpack_require__(419);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _Comments = __webpack_require__(425);
+
+var _Comments2 = _interopRequireDefault(_Comments);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35410,9 +35419,11 @@ var Background = _styledComponents2.default.div(_templateObject2, function (p) {
 
 var Info = _styledComponents2.default.div(_templateObject3);
 
-var Score = _styledComponents2.default.div(_templateObject4);
+var Rank = _styledComponents2.default.div(_templateObject4);
 
-var Rank = _styledComponents2.default.span(_templateObject5);
+var Score = _styledComponents2.default.span(_templateObject5);
+
+var By = _styledComponents2.default.span(_templateObject6);
 
 var FrontPage = function (_React$Component) {
   _inherits(FrontPage, _React$Component);
@@ -35434,35 +35445,50 @@ var FrontPage = function (_React$Component) {
         Wrap,
         { index: index, url: item.embedly.thumbnail_url },
         _react2.default.createElement(
-          Score,
+          Rank,
           null,
-          item.hn.score,
-          "/",
-          _react2.default.createElement(
-            Rank,
-            null,
-            index + 1,
-            "."
-          )
+          index + 1,
+          "."
         ),
         _react2.default.createElement(
           Info,
           null,
           _react2.default.createElement(
-            "h1",
-            null,
-            item.hn.title
-          ),
-          _react2.default.createElement(
             "a",
-            { href: item.hn.url },
-            item.hn.url.match(/[http:|https:]\/\/(.+?)\//)[1]
+            { href: item.hn.url, target: "_blank" },
+            _react2.default.createElement(
+              "h1",
+              null,
+              _react2.default.createElement(
+                "span",
+                null,
+                item.hn.url.match(/[http:|https:]\/\/(.+?)\//)[1]
+              ),
+              item.hn.title
+            )
           ),
           _react2.default.createElement(
-            "h3",
+            "p",
             null,
-            item.hn.by
-          )
+            _react2.default.createElement(
+              "span",
+              null,
+              item.hn.score,
+              " points"
+            ),
+            _react2.default.createElement(
+              By,
+              null,
+              _react2.default.createElement(
+                "a",
+                null,
+                item.hn.by
+              ),
+              " @ ",
+              new Date(item.hn.time).toString()
+            )
+          ),
+          _react2.default.createElement(_Comments2.default, { kids: item.hn.kids, descendants: item.hn.descendants })
         )
       );
     }
@@ -39422,6 +39448,75 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
     return targetComponent;
 };
 
+
+/***/ }),
+/* 425 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(["background: #fff;"], ["background: #fff;"]);
+
+var _react = __webpack_require__(95);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = __webpack_require__(419);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var Wrap = _styledComponents2.default.div(_templateObject);
+
+var FrontPage = function (_React$Component) {
+  _inherits(FrontPage, _React$Component);
+
+  function FrontPage(props) {
+    _classCallCheck(this, FrontPage);
+
+    return _possibleConstructorReturn(this, (FrontPage.__proto__ || Object.getPrototypeOf(FrontPage)).call(this, props));
+  }
+
+  _createClass(FrontPage, [{
+    key: "render",
+    value: function render() {
+      var _props = this.props,
+          kids = _props.kids,
+          descendants = _props.descendants;
+
+      return _react2.default.createElement(
+        Wrap,
+        null,
+        _react2.default.createElement(
+          "p",
+          null,
+          descendants,
+          " comments"
+        )
+      );
+    }
+  }]);
+
+  return FrontPage;
+}(_react2.default.Component);
+
+exports.default = FrontPage;
 
 /***/ })
 /******/ ]);
