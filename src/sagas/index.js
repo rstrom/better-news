@@ -9,7 +9,6 @@ export function* init() {
   try {
     const topReq = yield call(fetch, API.top);
     const top = yield call([topReq, topReq.json]);
-    console.log(top);
     const topTenReqs = yield all(
       top.slice(0, 10).map(id => {
         console.log(id);
@@ -19,9 +18,8 @@ export function* init() {
         );
       })
     );
-    console.log(topTenReqs);
     const topTenItems = yield all(topTenReqs.map(r => call([r, r.json])));
-    console.log(1, topTenItems);
+    console.log("LOADED TOP TEN:", topTenItems);
     const embedlyReqs = yield all(
       topTenItems.map(item => {
         const url = encodeURIComponent(item.url);
@@ -32,15 +30,14 @@ export function* init() {
       })
     );
     const embedlyJsons = yield all(embedlyReqs.map(r => call([r, r.json])));
-    console.log(2, embedlyJsons);
-    const items = [
-      {
-        name: "Qux"
-      }
-    ];
+    console.log("LOADED EMBEDLY:", embedlyJsons);
+    const items = topTenItems.map((item, i) => ({
+      hn: item,
+      embedly: embedlyJsons[i]
+    }));
     yield put({
       type: "LOAD",
-      items: topTenItems
+      items
     });
   } catch (e) {
     console.error(e, e.stack);

@@ -35184,69 +35184,68 @@ function init() {
 
         case 6:
           top = _context.sent;
-
-          console.log(top);
-          _context.next = 10;
+          _context.next = 9;
           return (0, _effects.all)(top.slice(0, 10).map(function (id) {
             console.log(id);
             return (0, _effects.call)(fetch, "https://hacker-news.firebaseio.com/v0/item/" + id + ".json");
           }));
 
-        case 10:
+        case 9:
           topTenReqs = _context.sent;
-
-          console.log(topTenReqs);
-          _context.next = 14;
+          _context.next = 12;
           return (0, _effects.all)(topTenReqs.map(function (r) {
             return (0, _effects.call)([r, r.json]);
           }));
 
-        case 14:
+        case 12:
           topTenItems = _context.sent;
 
-          console.log(1, topTenItems);
-          _context.next = 18;
+          console.log("LOADED TOP TEN:", topTenItems);
+          _context.next = 16;
           return (0, _effects.all)(topTenItems.map(function (item) {
             var url = encodeURIComponent(item.url);
             return (0, _effects.call)(fetch, "http://api.embed.ly/1/oembed?url=" + url + "&key=15d8c8a419c14f3e8f1f1424822dd394");
           }));
 
-        case 18:
+        case 16:
           embedlyReqs = _context.sent;
-          _context.next = 21;
+          _context.next = 19;
           return (0, _effects.all)(embedlyReqs.map(function (r) {
             return (0, _effects.call)([r, r.json]);
           }));
 
-        case 21:
+        case 19:
           embedlyJsons = _context.sent;
 
-          console.log(2, embedlyJsons);
-          items = [{
-            name: "Qux"
-          }];
-          _context.next = 26;
+          console.log("LOADED EMBEDLY:", embedlyJsons);
+          items = topTenItems.map(function (item, i) {
+            return {
+              hn: item,
+              embedly: embedlyJsons[i]
+            };
+          });
+          _context.next = 24;
           return (0, _effects.put)({
             type: "LOAD",
-            items: topTenItems
+            items: items
           });
 
-        case 26:
-          _context.next = 31;
+        case 24:
+          _context.next = 29;
           break;
 
-        case 28:
-          _context.prev = 28;
+        case 26:
+          _context.prev = 26;
           _context.t0 = _context["catch"](0);
 
           console.error(_context.t0, _context.t0.stack);
 
-        case 31:
+        case 29:
         case "end":
           return _context.stop();
       }
     }
-  }, _marked, this, [[0, 28]]);
+  }, _marked, this, [[0, 26]]);
 }
 
 function rootSaga() {
@@ -35375,7 +35374,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["flex: 0 0 auto;"], ["flex: 0 0 auto;"]);
+var _templateObject = _taggedTemplateLiteral(["\n  flex: 0 0 auto;\n  display: flex;\n  flex-direction: row;\n"], ["\n  flex: 0 0 auto;\n  display: flex;\n  flex-direction: row;\n"]),
+    _templateObject2 = _taggedTemplateLiteral(["\n  flex: 0 0 auto;\n  width: 8rem;\n  height: 8rem;\n  background: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n"], ["\n  flex: 0 0 auto;\n  width: 8rem;\n  height: 8rem;\n  background: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n"]),
+    _templateObject3 = _taggedTemplateLiteral(["flex: 1 0 auto;"], ["flex: 1 0 auto;"]);
 
 var _react = __webpack_require__(95);
 
@@ -35397,6 +35398,12 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var Wrap = _styledComponents2.default.div(_templateObject);
 
+var Thumbnail = _styledComponents2.default.div(_templateObject2, function (p) {
+  return p.url;
+});
+
+var Info = _styledComponents2.default.div(_templateObject3);
+
 var FrontPage = function (_React$Component) {
   _inherits(FrontPage, _React$Component);
 
@@ -35414,25 +35421,30 @@ var FrontPage = function (_React$Component) {
       return _react2.default.createElement(
         Wrap,
         null,
+        _react2.default.createElement(Thumbnail, { url: item.embedly.thumbnail_url }),
         _react2.default.createElement(
-          "h1",
+          Info,
           null,
-          item.title
-        ),
-        _react2.default.createElement(
-          "a",
-          { href: item.url },
-          item.url
-        ),
-        _react2.default.createElement(
-          "h2",
-          null,
-          item.score
-        ),
-        _react2.default.createElement(
-          "h3",
-          null,
-          item.by
+          _react2.default.createElement(
+            "h1",
+            null,
+            item.hn.title
+          ),
+          _react2.default.createElement(
+            "a",
+            { href: item.hn.url },
+            item.hn.url
+          ),
+          _react2.default.createElement(
+            "h2",
+            null,
+            item.hn.score
+          ),
+          _react2.default.createElement(
+            "h3",
+            null,
+            item.hn.by
+          )
         )
       );
     }
