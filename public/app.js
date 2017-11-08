@@ -35163,40 +35163,73 @@ var _effects = __webpack_require__(382);
 var _marked = /*#__PURE__*/regeneratorRuntime.mark(init),
     _marked2 = /*#__PURE__*/regeneratorRuntime.mark(rootSaga);
 
+var API = {
+  top: "https://hacker-news.firebaseio.com/v0/topstories.json"
+};
+
 function init() {
-  var items;
+  var topReq, top, topTenReqs, topTenItems, items;
   return regeneratorRuntime.wrap(function init$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
+          _context.next = 3;
+          return (0, _effects.call)(fetch, API.top);
 
-          // TODO hit HN api
+        case 3:
+          topReq = _context.sent;
+          _context.next = 6;
+          return (0, _effects.call)([topReq, topReq.json]);
+
+        case 6:
+          top = _context.sent;
+
+          console.log(top);
+          _context.next = 10;
+          return (0, _effects.all)(top.slice(0, 10).map(function (id) {
+            console.log(id);
+            return (0, _effects.call)(fetch, "https://hacker-news.firebaseio.com/v0/item/" + id + ".json");
+          }));
+
+        case 10:
+          topTenReqs = _context.sent;
+
+          console.log(topTenReqs);
+          _context.next = 14;
+          return (0, _effects.all)(topTenReqs.map(function (r) {
+            return (0, _effects.call)([r, r.json]);
+          }));
+
+        case 14:
+          topTenItems = _context.sent;
+
+          console.log(1, topTenItems);
           items = [{
             name: "Qux"
           }];
-          _context.next = 4;
+          _context.next = 19;
           return (0, _effects.put)({
             type: "LOAD",
-            items: items
+            items: topTenItems
           });
 
-        case 4:
-          _context.next = 9;
+        case 19:
+          _context.next = 24;
           break;
 
-        case 6:
-          _context.prev = 6;
+        case 21:
+          _context.prev = 21;
           _context.t0 = _context["catch"](0);
 
           console.error(_context.t0, _context.t0.stack);
 
-        case 9:
+        case 24:
         case "end":
           return _context.stop();
       }
     }
-  }, _marked, this, [[0, 6]]);
+  }, _marked, this, [[0, 21]]);
 }
 
 function rootSaga() {
@@ -35286,11 +35319,11 @@ var FrontPage = function (_React$Component) {
       return _react2.default.createElement(
         "ul",
         null,
-        items.map(function (item) {
+        items && items.map(function (item, i) {
           return _react2.default.createElement(
-            "li",
-            null,
-            item.name
+            "pre",
+            { key: i },
+            JSON.stringify(item, null, 2)
           );
         })
       );

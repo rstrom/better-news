@@ -7,6 +7,13 @@ export default class FrontPage extends React.Component {
 
   render() {
     const { items } = this.props;
-    return <ul>{items.map(item => <li>{item.name}</li>)}</ul>;
+    return (
+      <ul>
+        {items &&
+          items.map((item, i) => (
+            <pre key={i}>{JSON.stringify(item, null, 2)}</pre>
+          ))}
+      </ul>
+    );
   }
 }
