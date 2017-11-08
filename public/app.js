@@ -35205,7 +35205,7 @@ function init() {
           return (0, _effects.all)(topTenItems.map(function (item) {
             if (!item.url) item.url = "https://news.ycombinator.com/";
             var url = encodeURIComponent(item.url);
-            return (0, _effects.call)(fetch, "http://api.embed.ly/1/oembed?url=" + url + "&key=15d8c8a419c14f3e8f1f1424822dd394");
+            return (0, _effects.call)(fetch, "https://api.embed.ly/1/oembed?url=" + url + "&key=15d8c8a419c14f3e8f1f1424822dd394");
           }));
 
         case 16:

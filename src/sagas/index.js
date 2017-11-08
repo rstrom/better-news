@@ -26,7 +26,7 @@ export function* init() {
         const url = encodeURIComponent(item.url);
         return call(
           fetch,
-          `http://api.embed.ly/1/oembed?url=${url}&key=15d8c8a419c14f3e8f1f1424822dd394`
+          `https://api.embed.ly/1/oembed?url=${url}&key=15d8c8a419c14f3e8f1f1424822dd394`
         );
       })
     );
