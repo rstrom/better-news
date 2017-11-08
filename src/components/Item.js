@@ -1,11 +1,7 @@
 import React from "react";
-import Item from "./Item";
 import styled from "styled-components";
 
-const Wrap = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const Wrap = styled.div`flex: 0 0 auto;`;
 
 export default class FrontPage extends React.Component {
   constructor(props) {
@@ -13,10 +9,13 @@ export default class FrontPage extends React.Component {
   }
 
   render() {
-    const { items } = this.props;
+    const { item } = this.props;
     return (
       <Wrap>
-        {items && items.map((item, i) => <Item item={item} key={i} />)}
+        <h1>{item.title}</h1>
+        <a href={item.url}>{item.url}</a>
+        <h2>{item.score}</h2>
+        <h3>{item.by}</h3>
       </Wrap>
     );
   }
