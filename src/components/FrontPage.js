@@ -16,7 +16,8 @@ export default class FrontPage extends React.Component {
     const { items } = this.props;
     return (
       <Wrap>
-        {items && items.map((item, i) => <Item item={item} key={i} />)}
+        {items &&
+          items.map((item, i) => <Item item={item} index={i} key={i} />)}
       </Wrap>
     );
   }

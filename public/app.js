@@ -35350,7 +35350,7 @@ var FrontPage = function (_React$Component) {
         Wrap,
         null,
         items && items.map(function (item, i) {
-          return _react2.default.createElement(_Item2.default, { item: item, key: i });
+          return _react2.default.createElement(_Item2.default, { item: item, index: i, key: i });
         })
       );
     }
@@ -35374,9 +35374,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(["\n  flex: 0 0 auto;\n  display: flex;\n  flex-direction: row;\n"], ["\n  flex: 0 0 auto;\n  display: flex;\n  flex-direction: row;\n"]),
-    _templateObject2 = _taggedTemplateLiteral(["\n  flex: 0 0 auto;\n  width: 8rem;\n  height: 8rem;\n  background: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n"], ["\n  flex: 0 0 auto;\n  width: 8rem;\n  height: 8rem;\n  background: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n"]),
-    _templateObject3 = _taggedTemplateLiteral(["flex: 1 0 auto;"], ["flex: 1 0 auto;"]);
+var _templateObject = _taggedTemplateLiteral(["\n  flex: 1 0 auto;\n  display: flex;\n  justify-content: space-around;\n  flex-direction: row;\n  width: 100%;\n  background-color: hsl(", ", 80%, 80%);\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"], ["\n  flex: 1 0 auto;\n  display: flex;\n  justify-content: space-around;\n  flex-direction: row;\n  width: 100%;\n  background-color: hsl(", ", 80%, 80%);\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"]),
+    _templateObject2 = _taggedTemplateLiteral(["\n  width: 100%;\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"], ["\n  width: 100%;\n  background-image: url(\"", "\");\n  background-size: cover;\n  background-position: center center;\n  background-blend-mode: multiply;\n"]),
+    _templateObject3 = _taggedTemplateLiteral(["\n  flex: 1 0 auto;\n  margin-left: 2rem;\n\n  & h1 {\n    font-style: italic;\n    padding: 0.5rem;\n  }\n\n  & * {\n    max-width: 42rem;\n    display: block;\n    background-color: #fff;\n    white-space: wrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n"], ["\n  flex: 1 0 auto;\n  margin-left: 2rem;\n\n  & h1 {\n    font-style: italic;\n    padding: 0.5rem;\n  }\n\n  & * {\n    max-width: 42rem;\n    display: block;\n    background-color: #fff;\n    white-space: wrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n  }\n"]),
+    _templateObject4 = _taggedTemplateLiteral(["\n  flex: 0 0 16rem;\n  font-size: 4rem;\n  text-align: right;\n  color: #fff;\n"], ["\n  flex: 0 0 16rem;\n  font-size: 4rem;\n  text-align: right;\n  color: #fff;\n"]),
+    _templateObject5 = _taggedTemplateLiteral(["font-size: 6rem;"], ["font-size: 6rem;"]);
 
 var _react = __webpack_require__(95);
 
@@ -35396,13 +35398,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var Wrap = _styledComponents2.default.div(_templateObject);
+var Wrap = _styledComponents2.default.div(_templateObject, function (p) {
+  return p.index % 6 * 60;
+}, function (p) {
+  return p.url;
+});
 
-var Thumbnail = _styledComponents2.default.div(_templateObject2, function (p) {
+var Background = _styledComponents2.default.div(_templateObject2, function (p) {
   return p.url;
 });
 
 var Info = _styledComponents2.default.div(_templateObject3);
+
+var Score = _styledComponents2.default.div(_templateObject4);
+
+var Rank = _styledComponents2.default.span(_templateObject5);
 
 var FrontPage = function (_React$Component) {
   _inherits(FrontPage, _React$Component);
@@ -35416,12 +35426,25 @@ var FrontPage = function (_React$Component) {
   _createClass(FrontPage, [{
     key: "render",
     value: function render() {
-      var item = this.props.item;
+      var _props = this.props,
+          item = _props.item,
+          index = _props.index;
 
       return _react2.default.createElement(
         Wrap,
-        null,
-        _react2.default.createElement(Thumbnail, { url: item.embedly.thumbnail_url }),
+        { index: index, url: item.embedly.thumbnail_url },
+        _react2.default.createElement(
+          Score,
+          null,
+          item.hn.score,
+          "/",
+          _react2.default.createElement(
+            Rank,
+            null,
+            index + 1,
+            "."
+          )
+        ),
         _react2.default.createElement(
           Info,
           null,
@@ -35433,12 +35456,7 @@ var FrontPage = function (_React$Component) {
           _react2.default.createElement(
             "a",
             { href: item.hn.url },
-            item.hn.url
-          ),
-          _react2.default.createElement(
-            "h2",
-            null,
-            item.hn.score
+            item.hn.url.match(/[http:|https:]\/\/(.+?)\//)[1]
           ),
           _react2.default.createElement(
             "h3",
