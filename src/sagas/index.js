@@ -22,6 +22,17 @@ export function* init() {
     console.log(topTenReqs);
     const topTenItems = yield all(topTenReqs.map(r => call([r, r.json])));
     console.log(1, topTenItems);
+    const embedlyReqs = yield all(
+      topTenItems.map(item => {
+        const url = encodeURIComponent(item.url);
+        return call(
+          fetch,
+          `http://api.embed.ly/1/oembed?url=${url}&key=15d8c8a419c14f3e8f1f1424822dd394`
+        );
+      })
+    );
+    const embedlyJsons = yield all(embedlyReqs.map(r => call([r, r.json])));
+    console.log(2, embedlyJsons);
     const items = [
       {
         name: "Qux"

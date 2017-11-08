@@ -35168,7 +35168,7 @@ var API = {
 };
 
 function init() {
-  var topReq, top, topTenReqs, topTenItems, items;
+  var topReq, top, topTenReqs, topTenItems, embedlyReqs, embedlyJsons, items;
   return regeneratorRuntime.wrap(function init$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -35205,31 +35205,48 @@ function init() {
           topTenItems = _context.sent;
 
           console.log(1, topTenItems);
+          _context.next = 18;
+          return (0, _effects.all)(topTenItems.map(function (item) {
+            var url = encodeURIComponent(item.url);
+            return (0, _effects.call)(fetch, "http://api.embed.ly/1/oembed?url=" + url + "&key=15d8c8a419c14f3e8f1f1424822dd394");
+          }));
+
+        case 18:
+          embedlyReqs = _context.sent;
+          _context.next = 21;
+          return (0, _effects.all)(embedlyReqs.map(function (r) {
+            return (0, _effects.call)([r, r.json]);
+          }));
+
+        case 21:
+          embedlyJsons = _context.sent;
+
+          console.log(2, embedlyJsons);
           items = [{
             name: "Qux"
           }];
-          _context.next = 19;
+          _context.next = 26;
           return (0, _effects.put)({
             type: "LOAD",
             items: topTenItems
           });
 
-        case 19:
-          _context.next = 24;
+        case 26:
+          _context.next = 31;
           break;
 
-        case 21:
-          _context.prev = 21;
+        case 28:
+          _context.prev = 28;
           _context.t0 = _context["catch"](0);
 
           console.error(_context.t0, _context.t0.stack);
 
-        case 24:
+        case 31:
         case "end":
           return _context.stop();
       }
     }
-  }, _marked, this, [[0, 21]]);
+  }, _marked, this, [[0, 28]]);
 }
 
 function rootSaga() {
