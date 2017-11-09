@@ -20,25 +20,9 @@ export function* init() {
     );
     const topTenItems = yield all(topTenReqs.map(r => call([r, r.json])));
     console.log("LOADED TOP TEN:", topTenItems);
-    const embedlyReqs = yield all(
-      topTenItems.map(item => {
-        if (!item.url) item.url = "https://news.ycombinator.com/";
-        const url = encodeURIComponent(item.url);
-        return call(
-          fetch,
-          `https://api.embed.ly/1/oembed?url=${url}&key=15d8c8a419c14f3e8f1f1424822dd394`
-        );
-      })
-    );
-    const embedlyJsons = yield all(embedlyReqs.map(r => call([r, r.json])));
-    console.log("LOADED EMBEDLY:", embedlyJsons);
-    const items = topTenItems.map((item, i) => ({
-      hn: item,
-      embedly: embedlyJsons[i]
-    }));
     yield put({
       type: "LOAD",
-      items
+      items: topTenItems
     });
   } catch (e) {
     console.error(e, e.stack);

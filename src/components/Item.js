@@ -80,22 +80,22 @@ export default class FrontPage extends React.Component {
   render() {
     const { item, index } = this.props;
     return (
-      <Wrap index={index} url={item.embedly.thumbnail_url} className="item">
+      <Wrap index={index} className="item">
         <Rank>{index + 1}.</Rank>
         <Info>
-          <a href={item.hn.url} target="_blank">
+          <a href={item.url} target="_blank">
             <h1>
-              <span>{item.hn.url.match(/[http:|https:]\/\/(.+?)\//)[1]}</span>
-              {item.hn.title}
+              <span>{item.url.match(/[http:|https:]\/\/(.+?)\//)[1]}</span>
+              {item.title}
             </h1>
           </a>
           <p>
-            <span>{item.hn.score} points</span>
+            <span>{item.score} points</span>
             <By>
-              <a>{item.hn.by}</a> @ {new Date(item.hn.time).toString()}
+              <a>{item.by}</a> @ {new Date(item.time * 1000).toString()}
             </By>
           </p>
-          <Comments kids={item.hn.kids} descendants={item.hn.descendants} />
+          <Comments kids={item.kids} descendants={item.descendants} />
         </Info>
       </Wrap>
     );
