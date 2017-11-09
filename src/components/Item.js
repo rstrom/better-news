@@ -8,6 +8,7 @@ const Wrap = styled.div`
   justify-content: center;
   flex-direction: row;
   width: 100%;
+  height: ${p => p.height || "auto"};
   background-color: hsl(${p => (p.index % 6) * 60}, 95%, 85%);
   background-image: url("${p => p.url}");
   background-size: cover;
@@ -25,6 +26,7 @@ const Background = styled.div`
 
 const Info = styled.div`
   flex: 0 0 auto;
+  width: 42rem;
   margin-left: 2rem;
 
   & h1 {
@@ -72,20 +74,28 @@ const Score = styled.span`
 
 const By = styled.span`float: right;`;
 
-export default class FrontPage extends React.Component {
+export default class Item extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.load(this.props.id);
+  }
+
   render() {
     const { item, index } = this.props;
-    return (
+    const domain =
+      item &&
+      /[http:|https:]\/\/(.+?)\//.test(item.url) &&
+      item.url.match(/[http:|https:]\/\/(.+?)\//)[1];
+    return item ? (
       <Wrap index={index} className="item">
         <Rank>{index + 1}.</Rank>
         <Info>
           <a href={item.url} target="_blank">
             <h1>
-              <span>{item.url.match(/[http:|https:]\/\/(.+?)\//)[1]}</span>
+              <span>{domain}</span>
               {item.title}
             </h1>
           </a>
@@ -96,6 +106,13 @@ export default class FrontPage extends React.Component {
             </By>
           </p>
           <Comments kids={item.kids} descendants={item.descendants} />
+        </Info>
+      </Wrap>
+    ) : (
+      <Wrap index={index} height="16rem">
+        <Rank>{index + 1}.</Rank>
+        <Info>
+          <h1>...</h1>
         </Info>
       </Wrap>
     );

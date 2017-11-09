@@ -1,5 +1,5 @@
 import React from "react";
-import Item from "./Item";
+import Item from "../containers/Item";
 import styled, { injectGlobal } from "styled-components";
 
 injectGlobal`
@@ -25,11 +25,10 @@ export default class FrontPage extends React.Component {
   }
 
   render() {
-    const { items } = this.props;
+    const { top, items } = this.props;
     return (
       <Wrap>
-        {items &&
-          items.map((item, i) => <Item item={item} index={i} key={i} />)}
+        {top && top.map((id, i) => <Item id={id} index={i} key={i} />)}
       </Wrap>
     );
   }
