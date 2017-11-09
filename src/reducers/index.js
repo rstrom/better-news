@@ -1,6 +1,6 @@
 const initial = {
   items: {},
-  top: new Array(10)
+  top: []
 };
 
 export default function(state = initial, action) {
