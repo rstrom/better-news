@@ -1,6 +1,8 @@
 const path = require("path");
+const webpack = require("webpack");
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 
-module.exports = {
+module.exports = (env = {}) => ({
   entry: [
     "babel-polyfill",
     "whatwg-fetch",
@@ -9,6 +11,10 @@ module.exports = {
   output: {
     filename: "app.js",
     path: path.resolve(__dirname, "public")
+  },
+  devServer: {
+    contentBase: path.resolve(__dirname, "public"),
+    port: 3000
   },
   module: {
     rules: [
@@ -24,5 +30,13 @@ module.exports = {
         }
       }
     ]
-  }
-};
+  },
+  plugins: env.production && [
+    new MinifyPlugin(),
+    new webpack.DefinePlugin({
+      "process.env": {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+      }
+    })
+  ]
+});

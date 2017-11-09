@@ -80,7 +80,7 @@ export default class FrontPage extends React.Component {
   render() {
     const { item, index } = this.props;
     return (
-      <Wrap index={index} url={item.embedly.thumbnail_url}>
+      <Wrap index={index} url={item.embedly.thumbnail_url} className="item">
         <Rank>{index + 1}.</Rank>
         <Info>
           <a href={item.hn.url} target="_blank">
