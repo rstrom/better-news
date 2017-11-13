@@ -5,17 +5,30 @@ import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import reducers from "./reducers";
 import rootSaga from "./sagas";
-import FrontPage from "./containers/FrontPage";
+import Router from "./containers/Router";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
-store.dispatch({ type: "INIT" });
+store.dispatch({
+  type: "ROUTE",
+  hash: location.hash,
+  silent: true
+});
+
+window.onpopstate = event => {
+  console.log(event);
+  store.dispatch({
+    type: "ROUTE",
+    hash: location.hash,
+    silent: true
+  });
+};
 
 render(
   <Provider store={store}>
-    <FrontPage />
+    <Router />
   </Provider>,
   document.getElementById("root")
 );

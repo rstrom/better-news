@@ -24,6 +24,10 @@ export default class FrontPage extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.load();
+  }
+
   render() {
     const { top, items } = this.props;
     return (

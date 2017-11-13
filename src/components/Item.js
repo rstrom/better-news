@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
 import Story from "./Story";
 import Comment from "./Comment";
+import Loading from "./Loading";
 
 export default class Item extends React.Component {
   constructor(props) {
@@ -20,6 +20,10 @@ export default class Item extends React.Component {
         return <Story item={item} index={index} />;
       case "comment":
         return <Comment item={item} />;
+      case "LOADING":
+        return <Loading />;
+      case "ERROR":
+        return <div>{item.code}</div>;
       default:
         return null;
     }

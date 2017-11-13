@@ -6,7 +6,13 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {};
+  return {
+    load: id => {
+      dispatch({
+        type: "LOAD_TOP"
+      });
+    }
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FrontPage);
