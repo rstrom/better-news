@@ -18,6 +18,10 @@ export default class Item extends React.Component {
     switch (item.type) {
       case "story":
         return <Story item={item} index={index} />;
+      case "ask":
+        return <Story item={item} index={index} />;
+      case "job":
+        return <Story item={item} index={index} />;
       case "comment":
         return <Comment item={item} />;
       case "LOADING":

@@ -18,4 +18,4 @@ const Rotate = styled.div`
   margin: ${p => p.margin};
 `;
 
-export default () => <Rotate>↻</Rotate>;
+export default () => <Rotate className="loading">↻</Rotate>;

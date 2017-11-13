@@ -11,7 +11,6 @@ export function* route({ hash, silent }) {
   try {
     const { id } = PathMatch()("#/:id?")(hash);
     if (!silent) history.pushState({}, null, hash);
-    console.log("r", id);
     yield put({
       type: "ROUTED",
       id: id || "top"

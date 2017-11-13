@@ -18,7 +18,6 @@ store.dispatch({
 });
 
 window.onpopstate = event => {
-  console.log(event);
   store.dispatch({
     type: "ROUTE",
     hash: location.hash,
