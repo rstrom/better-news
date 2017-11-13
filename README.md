@@ -1,8 +1,10 @@
-# Hacker News 🌈
+# Hacker News 🌈 [![Build Status](https://travis-ci.org/rstrom/better-news.svg?branch=master)](https://travis-ci.org/rstrom/better-news)
 
 https://rstrom.github.io/better-news/public/
 
-This an attempt at a "better news" style app using the HN Firebase API. ~~It integrates the Embedly api to fetch thumbnail previews of the top ten stories.~~
+Cypress dashboard: https://dashboard.cypress.io/#/projects/ka9kqf/runs
+
+This an attempt at a "better news" type app using the HN Firebase API.
 
 Stack:
 * Webpack
@@ -11,9 +13,3 @@ Stack:
 * Redux
 * Sagas
 * Styled Components
-
-Todos:
-* Tests
-* Implement comments
-* Lazy load story items
-* Improve readability
