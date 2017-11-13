@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - 8.7.0
+  - 8
 
 cache: yarn
 
@@ -12,4 +12,4 @@ before_script:
   - yarn start > /dev/null &
 
 script:
-  - yarn cypress run --record
+  - yarn cypress run -- --record
