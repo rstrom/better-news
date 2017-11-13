@@ -1,13 +1,15 @@
 language: node_js
 
 node_js:
-  - 6.5.0
+  - 8.7.0
+
+cache: yarn
 
 install:
-  - npm install
+  - yarn install --frozen-lockfile
 
 before_script:
-  - npm start -- --silent &
+  - yarn start > /dev/null &
 
 script:
-  - $(npm bin)/cypress run --record
+  - yarn cypress run --record
